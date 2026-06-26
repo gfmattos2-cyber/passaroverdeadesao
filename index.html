@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Benefício Energia Verde — Pássaro Verde & Desconto Sollar</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top decorative bar -->
+    <div class="top-bar"></div>
+
+    <div class="main-wrapper">
+        <!-- Logo and Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="../passaro_verde_logo.png" alt="Logo Pássaro Verde" class="company-logo">
+                <span class="logo-divider"></span>
+                <div class="partner-logo">
+                    <span>Desconto</span> Sollar
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Card -->
+        <main class="card-container">
+            <!-- Intro / Hero Area inside card -->
+            <div class="hero-section">
+                <div class="benefit-badge">Benefício Exclusivo para Colaboradores</div>
+                <h1>Programa Energia Verde da Pássaro Verde</h1>
+                <p>Economize até <strong>20% na sua conta de luz da CEMIG</strong> sem gastar nada, sem instalar placas e sem obras em casa. Um benefício oferecido em parceria com a Desconto Sollar.</p>
+                
+                <div class="benefits-row">
+                    <div class="benefit-item">
+                        <div class="icon">💰</div>
+                        <span>Economia Real na CEMIG</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">🛠️</div>
+                        <span>Sem Obras ou Placas</span>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">🆓</div>
+                        <span>Adesão 100% Gratuita</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Progress Stepper -->
+            <div class="stepper">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Dados Pessoais</div>
+                </div>
+                <div class="step-line" id="step-line-1"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Documentação</div>
+                </div>
+            </div>
+
+            <!-- Main Form -->
+            <form id="onboarding-form" novalidate>
+                
+                <!-- STEP 1: Personal Details -->
+                <div class="form-step active" id="step-1">
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                            <span class="error-message">Por favor, insira seu nome completo.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="cpf">CPF</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                            <span class="error-message">CPF inválido ou incompleto.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">WhatsApp / Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
+                            <span class="error-message">Telefone inválido ou incompleto.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group-row">
+                        <div class="form-group">
+                            <label for="email">E-mail Pessoal</label>
+                            <input type="email" id="email" name="email" placeholder="nome@email.com" required>
+                            <span class="error-message">Insira um endereço de e-mail válido.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" id="btn-next">Avançar para Documentos →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Document Upload -->
+                <div class="form-step" id="step-2">
+                    <div class="upload-intro">
+                        <h3>Anexo de Documentos</h3>
+                        <p>Precisamos da foto de sua conta de luz para calcular o desconto e de sua identificação para validar a assinatura digital de adesão.</p>
+                    </div>
+
+                    <!-- Upload Zone 1: Energy Bill -->
+                    <div class="form-group">
+                        <label>Conta de Energia CEMIG (Foto ou PDF)</label>
+                        <div class="upload-zone" id="zone-fatura">
+                            <input type="file" id="fatura_energia" name="fatura_energia" accept="image/*,application/pdf" required style="display:none;">
+                            <div class="upload-content">
+                                <div class="upload-icon">📄</div>
+                                <p class="upload-text">Arraste ou clique para tirar foto/anexar a última conta</p>
+                                <span class="upload-filename" id="name-fatura">Nenhum arquivo selecionado</span>
+                            </div>
+                            <div class="preview-container" id="preview-fatura" style="display:none;">
+                                <img src="" alt="Preview Fatura">
+                                <button type="button" class="btn-remove" id="remove-fatura">Remover</button>
+                            </div>
+                        </div>
+                        <span class="error-message" id="error-fatura">O envio da conta de energia é obrigatório.</span>
+                    </div>
+
+                    <!-- Upload Zone 2: ID / CNH -->
+                    <div class="form-group">
+                        <label>Identidade ou CNH (Frente e Verso)</label>
+                        <div class="upload-zone" id="zone-cnh">
+                            <input type="file" id="cnh_documento" name="cnh_documento" accept="image/*,application/pdf" required style="display:none;">
+                            <div class="upload-content">
+                                <div class="upload-icon">🪪</div>
+                                <p class="upload-text">Arraste ou clique para tirar foto/anexar sua CNH ou RG</p>
+                                <span class="upload-filename" id="name-cnh">Nenhum arquivo selecionado</span>
+                            </div>
+                            <div class="preview-container" id="preview-cnh" style="display:none;">
+                                <img src="" alt="Preview CNH">
+                                <button type="button" class="btn-remove" id="remove-cnh">Remover</button>
+                            </div>
+                        </div>
+                        <span class="error-message" id="error-cnh">O envio do documento de identidade é obrigatório.</span>
+                    </div>
+
+                    <!-- Consent and Terms -->
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="consentimento" name="consentimento" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">Autorizo a análise da minha conta de luz pela Desconto Sollar e concordo em prosseguir com o cadastro do benefício voluntário de energia verde sob as regras da ANEEL.</span>
+                        </label>
+                        <span class="error-message" id="error-consentimento">Você precisa aceitar os termos para prosseguir.</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-prev">← Voltar</button>
+                        <button type="submit" class="btn btn-success" id="btn-submit">Enviar Cadastro ✓</button>
+                    </div>
+                </div>
+
+                <!-- SUCCESS SCREEN (DYNAMIC) -->
+                <div class="success-screen" id="success-screen" style="display: none;">
+                    <div class="success-icon">🎉</div>
+                    <h2>Cadastro Recebido com Sucesso!</h2>
+                    <p>Obrigado pelo envio. Seus dados e documentos foram enviados para análise de viabilidade técnica.</p>
+                    
+                    <div class="next-steps-card">
+                        <h4>Quais são os próximos passos?</h4>
+                        <ul>
+                            <li><strong>1. Validação de Vínculo:</strong> O RH irá validar seu vínculo ativo na Pássaro Verde através do seu CPF.</li>
+                            <li><strong>2. Processamento CEMIG:</strong> Faremos o cadastro do benefício na distribuidora (prazo de 30 a 60 dias para ativação dos créditos).</li>
+                            <li><strong>3. Início da Economia:</strong> Você receberá a confirmação em seu WhatsApp assim que o primeiro desconto for injetado.</li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="window.location.reload();">Fazer Novo Cadastro</button>
+                </div>
+
+            </form>
+        </main>
+
+        <!-- FAQ Section -->
+        <section class="faq-container">
+            <h2>Dúvidas Frequentes</h2>
+            
+            <div class="faq-item">
+                <h3>Como é gerada a energia?</h3>
+                <p>A energia é gerada em usinas solares parceiras do proprietário Rogério. Ela é injetada diretamente na rede da CEMIG, gerando créditos que são descontados da sua fatura mensal.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Preciso fazer alguma obra na minha residência?</h3>
+                <p>Não. Não há alteração física alguma, obras, quebras ou instalação de placas. O benefício é 100% digital e administrativo.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>O desconto é descontado em folha (holerite)?</h3>
+                <p>Não. A cobrança é feita de forma independente. Você continuará recebendo sua conta da CEMIG (com o desconto inserido) e uma fatura correspondente da Desconto Sollar com o desconto já deduzido.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Moro de aluguel. Posso aderir?</h3>
+                <p>Sim! Desde que a conta de luz da CEMIG esteja em seu nome (ou de parentes de primeiro grau residentes no mesmo endereço), o benefício pode ser ativado perfeitamente.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer-container">
+            <p>Programa Energia Verde da Pássaro Verde em parceria com Desconto Sollar</p>
+            <p class="regulated">Soluções regulamentadas pela ANEEL — Resoluções 482/2012 e 687/2015.</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript script link -->
+    <script src="app.js"></script>
+</body>
+</html>
