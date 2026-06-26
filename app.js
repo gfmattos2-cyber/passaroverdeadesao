@@ -361,10 +361,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Parâmetros do FormSubmit para personalizar o e-mail recebido
             formData.append('_captcha', 'false');
             formData.append('_subject', 'Nova Adesão Energia Verde - Pássaro Verde');
+            formData.append('_template', 'table');
             
             // Enviar os dados via AJAX para o e-mail de destino
             fetch("https://formsubmit.co/ajax/descontosollarenergia@gmail.com", {
                 method: "POST",
+                headers: {
+                    'Accept': 'application/json'
+                },
                 body: formData
             })
             .then(response => response.json())
