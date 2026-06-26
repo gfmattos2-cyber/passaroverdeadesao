@@ -739,3 +739,43 @@ input:focus {
         gap: 8px;
     }
 }
+
+/* --- DISCOUNT CALLOUT BANNER --- */
+.discount-callout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #E8F5E9;
+    border: 1px dashed rgba(27, 94, 32, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+}
+
+.discount-icon {
+    font-size: 20px;
+    color: var(--accent);
+    animation: pulse 2s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discount-text {
+    font-size: 13.5px;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.discount-text strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
