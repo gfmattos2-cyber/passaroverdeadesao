@@ -3,6 +3,12 @@
  * Gerenciamento de Stepper, Máscaras de CPF/Telefone, Upload de Arquivos e Validações
  */
 
+// --- CONFIGURAÇÃO DO INTEGRATION ENDPOINT ---
+// Opção A (FormSubmit): "https://formsubmit.co/ajax/descontosollarenergia@gmail.com"
+// Opção B (Vercel Serverless Function): "/api/submit"
+// Opção C (n8n Webhook): "https://seu-n8n.com/webhook/adesao-passaro-verde"
+const INTEGRATION_ENDPOINT = "https://burrowinggoose-n8n.cloudfy.live/webhook/36c55c3e-5895-40b5-b4b8-2c7546ce6e18";
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- ELEMENT SELECTORS ---
@@ -234,12 +240,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
     zoneFatura.addEventListener('drop', (e) => {
         const file = e.dataTransfer.files[0];
-        if (file) handleFileSelection(file, 'fatura');
+        if (file) {
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            fileFatura.files = dt.files;
+            handleFileSelection(file, 'fatura');
+        }
     });
     
     zoneCnh.addEventListener('drop', (e) => {
         const file = e.dataTransfer.files[0];
-        if (file) handleFileSelection(file, 'cnh');
+        if (file) {
+            const dt = new DataTransfer();
+            dt.items.add(file);
+            fileCnh.files = dt.files;
+            handleFileSelection(file, 'cnh');
+        }
     });
 
     // Handle selected files
@@ -355,16 +371,16 @@ document.addEventListener('DOMContentLoaded', () => {
             btnSubmit.disabled = true;
             btnSubmit.innerText = "Enviando Documentos...";
             
-            // Preparar os dados para envio via FormSubmit
+            // Preparar os dados para envio
             const formData = new FormData(form);
             
-            // Parâmetros do FormSubmit para personalizar o e-mail recebido
+            // Parâmetros do FormSubmit para personalizar o e-mail recebido (ignorados se usar Vercel/n8n)
             formData.append('_captcha', 'false');
             formData.append('_subject', 'Nova Adesão Energia Verde - Pássaro Verde');
             formData.append('_template', 'table');
             
-            // Enviar os dados via AJAX para o e-mail de destino
-            fetch("https://formsubmit.co/ajax/descontosollarenergia@gmail.com", {
+            // Enviar os dados via AJAX para o endpoint configurado
+            fetch(INTEGRATION_ENDPOINT, {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json'
