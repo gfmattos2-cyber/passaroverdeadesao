@@ -779,3 +779,23 @@ input:focus {
     50% { transform: scale(1.15); }
     100% { transform: scale(1); }
 }
+
+.hero-footnote {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.discount-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.discount-subtext {
+    font-size: 11px;
+    color: var(--primary);
+    opacity: 0.8;
+    font-style: italic;
+}
