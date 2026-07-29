@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputCpf = document.getElementById('cpf');
     const inputTelefone = document.getElementById('telefone');
     const inputEmail = document.getElementById('email');
+    const inputCodigoGestor = document.getElementById('codigo_gestor');
     const checkConsent = document.getElementById('consentimento');
     
     // File Inputs & Upload Zones
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Clear errors on input change
-    [inputNome, inputEmail].forEach(input => {
+    [inputNome, inputEmail, inputCodigoGestor].forEach(input => {
         input.addEventListener('input', () => clearError(input));
     });
 
@@ -171,6 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         } else {
             clearError(inputEmail);
+        }
+
+        // Validar Código do Gestor
+        if (inputCodigoGestor.value.trim().length < 2) {
+            showError(inputCodigoGestor);
+            isValid = false;
+        } else {
+            clearError(inputCodigoGestor);
         }
         
         return isValid;
