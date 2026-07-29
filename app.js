@@ -398,7 +398,11 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success === "true" || data.success === true) {
+                // n8n pode retornar um array como [{"success": true}] ou um objeto direto {"success": true}
+                const isSuccess = data.success === "true" || data.success === true || 
+                                  (Array.isArray(data) && data[0] && (data[0].success === true || data[0].success === "true"));
+                
+                if (isSuccess) {
                     // Esconder botões e stepper
                     document.querySelector('.stepper').style.display = 'none';
                     step2.style.display = 'none';
@@ -413,9 +417,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     stepIndicator2.classList.remove('active');
                     stepIndicator2.classList.add('completed');
                 } else {
+                    console.error("Erro retornado pelo n8n:", data);
                     btnSubmit.disabled = false;
                     btnSubmit.innerText = "Enviar Cadastro ✓";
-                    alert("Ocorreu um erro ao enviar seu formulário. Por favor, tente novamente.");
+                    alert("Ocorreu um erro ao processar seu cadastro no servidor. Por favor, verifique se o fluxo do n8n está ativo ou contate o administrador.");
                 }
             })
             .catch(error => {
