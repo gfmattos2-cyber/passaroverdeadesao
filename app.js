@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gestorCode = urlParams.get('ref') || urlParams.get('code') || urlParams.get('gestor') || urlParams.get('codigo_gestor');
     if (gestorCode) {
         inputCodigoGestor.value = gestorCode.toUpperCase();
+        inputCodigoGestor.readOnly = true;
+        inputCodigoGestor.style.backgroundColor = '#eef2f3'; // Light background showing it is locked
+        inputCodigoGestor.style.cursor = 'not-allowed';
+        inputCodigoGestor.title = 'Código de indicação travado automaticamente';
     }
     
     // File Inputs & Upload Zones
