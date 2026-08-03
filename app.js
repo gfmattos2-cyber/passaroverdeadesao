@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputCodigoGestor = document.getElementById('codigo_gestor');
     const checkConsent = document.getElementById('consentimento');
     
+    // --- PARSE URL REFERRAL / MANAGER CODE ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const gestorCode = urlParams.get('ref') || urlParams.get('code') || urlParams.get('gestor') || urlParams.get('codigo_gestor');
+    if (gestorCode) {
+        inputCodigoGestor.value = gestorCode.toUpperCase();
+    }
+    
     // File Inputs & Upload Zones
     const fileFatura = document.getElementById('fatura_energia');
     const fileCnh = document.getElementById('cnh_documento');
